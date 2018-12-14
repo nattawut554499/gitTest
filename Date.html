@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link href='fullcalendar-3.9.0/fullcalendar.min.css' rel='stylesheet' />
+    <link href='fullcalendar-3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <script src='fullcalendar-3.9.0/lib/moment.min.js'></script>
+    <script src='fullcalendar-3.9.0/lib/jquery.min.js'></script>
+    <script src='fullcalendar-3.9.0/fullcalendar.min.js'></script>
+    <script>
+        var today = new Date();
+        var defDate = today.getFullYear + '//' + today.getMonth + '//' + today.getDate;
+        console.log(defDate);
+
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listWeek'
+                },
+                defaultDate: today,
+                navLinks: true, // can click day/week names to navigate views
+                selectable: true,
+                selectHelper: true,
+                select: function (start, end) {
+                    
+                    var title = prompt('Event Title:');
+                    var eventData;
+                    if (title) {
+                        eventData = {
+                            title: title,
+                            start: start,
+                            end: end
+                        };
+                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                    }
+                    $('#calendar').fullCalendar('unselect');
+                },
+                editable: true,
+                eventLimit: true,
+                events: [
+                    {
+                        title: '1st Event',
+                        start: '2018-12-13',
+                        end: '2018-12-15'
+                    },
+                    {
+                        title: 'Long Event',
+                        start: '2018-012-07',
+                        end: '2018-12-10',
+                        color: 'rgb(0,200,0)',
+                    }
+                ]
+            });
+        });
+    </script>
+
+    <title>Appointment</title>
+</head>
+
+<body>
+    <section id="section1" class="text-white" style="height: 100vh;background-color: #101010">
+        <div class="container" style="padding-top: 8rem">
+            <div class="text-left">
+                <div class="col">
+                    <h1 id="h_queue">A1011</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="border border-info rounded">
+                <div class="row">
+                    <div class="col">
+                        <p class="text-right">Queue :</p>
+                    </div>
+                    <div class="col">
+                        <p id="queue">A1011</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-right">HN :</p>
+                    </div>
+                    <div class="col">
+                        <p id="HN">58114232</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-right">Full name :</p>
+                    </div>
+                    <div class="col">
+                        <p id="fullName">Wut Nattawut</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-right">Age :</p>
+                    </div>
+                    <div class="col">
+                        <p id="age">20</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-right">Desciption :</p>
+                    </div>
+                    <div class="col">
+                        <p id="desciption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta quo, hic
+                            quis
+                            expedita ipsa harum velit laborum molestiae et illo!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class=" mt-5">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#calendarModal">Appoint</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary btn-block">Next queue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- modal appointment-->
+    <div class="modal fade " id="appointModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!--...-->
+                    <div class="card text-white text-center" style="background-color: #4e6b5f">
+                        <div class="card-body">
+                            <h3 class>ใบนัด</h3>
+                            <form>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <label>วันที่นัดหมาย</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="date" class="form-control" id="appointDate">
+                                        </div>
+                                        <div class="col-1">
+                                            <label>เวลา</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="time" class="form-control" id="appointTime">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="appointBehav" placeholder="การปฏิบัติตัวก่อนพบแพทย์">
+                                </div>
+                                <div class="form-group">
+                                    การตรวจพิเศษครั้งถัดไป
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="appointLAB" placeholder="LAB">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="appointXray" placeholder="X-ray">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-block btn-outline-light">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- -->
+
+    <!-- modal Calendar-->
+    <div class="modal fade bg-dark" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ปฏิทิน</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body px-1 py-2">
+                    <div id="calendar">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#appointModal"
+                        data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal Calendar-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="simpleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    function selectedDate() {
+        console.log(document.getElementById('queue').innerHTML);
+    }
+
+    function selectDate(X) {
+        console.log(X.innerHTML);
+
+    }
+
+</script>
+
+</html>
